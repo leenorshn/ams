@@ -1,36 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
-const transactions = [
-    {
-        id: 'AAPS0L',
-        company: 'Chase & Co.',
-        share: 'CAC',
-        commission: '+$4.37',
-        price: '$3,509.00',
-        quantity: '12.00',
-        netAmount: '$4,397.00',
-    },
-    {
-        id: 'AAPS0L-1',
-        company: 'Chase & Co.',
-        share: 'CAC',
-        commission: '+$4.37',
-        price: '$3,509.00',
-        quantity: '12.00',
-        netAmount: '$4,397.00',
-    },
-    {
-        id: 'AAPS0L-2',
-        company: 'Chaise ',
-        share: 'CAC',
-        commission: '+$4.37',
-        price: '$3,509.00',
-        quantity: '12.00',
-        netAmount: '$4,397.00',
-    },
-    // More transactions...
-]
 
-export default function TableVente() {
+
+export default function TableVente({ data }) {
     return (
         <div className="px-4 sm:px-6 lg:px-8">
 
@@ -79,18 +50,27 @@ export default function TableVente() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                    {transactions.map((transaction) => (
+                                    {data.map((transaction) => (
                                         <tr key={transaction.id}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                {transaction.id}
+                                                {transaction.date.seconds}
                                             </td>
                                             <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-                                                {transaction.company}
+                                                {transaction.panier.map((p, i) => (<div key={i}>
+                                                    <h1>{p.count}{p.product.name}</h1>
+
+                                                </div>))}
                                             </td>
 
-                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{transaction.price}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{transaction.quantity}</td>
-                                            <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{transaction.netAmount}</td>
+                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{transaction.panier.map((p, i) => (<div key={i}>
+                                                <h1>{p.product.price}$</h1>
+
+                                            </div>))}</td>
+                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{transaction.panier.map((p, i) => (<div key={i}>
+                                                <h1>{p.count}carton</h1>
+
+                                            </div>))}</td>
+                                            <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{transaction.montant}$</td>
                                             <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                 <a href="#" className="text-indigo-600 hover:text-indigo-900">
                                                     facture<span className="sr-only">, {transaction.id}</span>
