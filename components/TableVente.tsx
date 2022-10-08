@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 
-
+import Moment from "react-moment"
 export default function TableVente({ data }) {
     return (
         <div className="px-4 sm:px-6 lg:px-8">
@@ -53,7 +53,10 @@ export default function TableVente({ data }) {
                                     {data.map((transaction) => (
                                         <tr key={transaction.id}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                {transaction.date.seconds}
+                                                <Moment
+                                                    format="DD/MM/YYYY à HH:mm"
+                                                    date={transaction.date.seconds * 1000}
+                                                ></Moment>
                                             </td>
                                             <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
                                                 {transaction.panier.map((p, i) => (<div key={i}>
